@@ -1,0 +1,7 @@
+{
+    "node": true,
+    "strict": "global",
+    "sub": true,
+    "esversion": 6,
+    "laxcomma": true
+}
