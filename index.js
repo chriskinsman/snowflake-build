@@ -146,12 +146,12 @@ Builder.prototype._createEmptyDatabase = function _createEmptyDatabase(steps, ca
 Builder.prototype._loadTable = function _loadTable(databaseName, step, callback) {
     const self = this;
     debug("Loading table: " + step.table);
-    self._snowflake.execute(self._warehouseName, `COPY INTO ${step.table} FROM s3://${self._s3Bucket}/${step.s3Location} FILE_FORMAT=(TYPE=CSV SKIP_HEADER=1 FIELD_OPTIONALLY_ENCLOSED_BY='"' ESCAPE_UNENCLOSED_FIELD=NONE) CREDENTIALS=(AWS_KEY_ID='${self._awsAccessKeyId}' AWS_SECRET_KEY='${self._awsSecretAccessKey}')`, [], { database: databaseName }, function(err) {
+    self._snowflake.execute(self._warehouseName, `COPY INTO ${step.table} FROM s3://${self._s3Bucket}/${step.s3Location} FILE_FORMAT=(TYPE=CSV SKIP_HEADER=1 FIELD_OPTIONALLY_ENCLOSED_BY='"' ESCAPE_UNENCLOSED_FIELD=NONE) CREDENTIALS=(AWS_KEY_ID='${self._awsAccessKeyId}' AWS_SECRET_KEY='${self._awsSecretAccessKey}')`, [], { database: databaseName }, function(err, rows) {
         if (err) {
             debug(`Error loading table: ${step.table} err: ${err}`);
             callback(err);
         } else {
-            debug('Finished loading table: ' + step.table);
+            debug('Finished loading table: ' + step.table, rows);
             callback(null);
         }
     });
