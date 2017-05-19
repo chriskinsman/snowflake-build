@@ -1,8 +1,9 @@
 #! /usr/bin/env node
 'use strict';
-console.info('Account: ' + process.env.SNOWFLAKE_ACCOUNT);
-const Builder = require('../index');
 
+console.info('Account: ' + process.env.SNOWFLAKE_ACCOUNT);
+
+const Builder = require('../index');
 const builder = new Builder(process.env.SNOWFLAKE_ACCOUNT, process.env.SNOWFLAKE_USERNAME, process.env.SNOWFLAKE_PASSWORD, process.env.SNOWFLAKE_REDISHOST, process.env.SNOWFLAKE_REDISPORT, 'testing', process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY, 'warehouse-kinsman-net', 'us-west-2', 'CHRISTEST_');
 
 const Tests = {};
